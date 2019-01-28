@@ -94,8 +94,8 @@ const shoppingList = (function(){
       // const newObj = { 
       //   currentCheckedItem
       // };
-      api.updateItem(id, {currentCheckedItem} ) // call api.updateItem, sending in the id and a new OBJECT containing opposite of item.checked?
-        .then(res => store.findAndUpdate(id, {currentCheckedItem})); // inside then() call store.findAndUpdate sending same arguments & render()
+      api.updateItem(id, { currentCheckedItem } ) // call api.updateItem, sending in the id and a new OBJECT containing opposite of item.checked?
+        .then(store.findAndUpdate(id, {currentCheckedItem})); // inside then() call store.findAndUpdate sending same arguments & render()
       render();   
       // store.findAndToggleChecked(id);
     });
@@ -124,8 +124,8 @@ const shoppingList = (function(){
       // call api.updateItem, sending in the id and new object containg newName
       api.updateItem(id, itemName); // step 8
       store.findAndUpdate(id, itemName); // step 8
-      store.findAndUpdateName(id, itemName);
-      store.setItemIsEditing(id, false);
+      // store.findAndUpdateName(id, itemName);
+      // store.setItemIsEditing(id, false);
       render();
     });
   }

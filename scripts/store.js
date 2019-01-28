@@ -3,7 +3,7 @@
 
 // eslint-disable-next-line no-unused-vars
 const store = (function() {
-  
+
   const addItem = function(item) {
     this.items.push(item);
   };
@@ -48,7 +48,7 @@ const store = (function() {
   // Step 7: Create a consolidated findAndUpdate method
   const findAndUpdate = function(id, newData) {
     const findItem = this.findById(id);
-    Object.assign(findItem, newData);
+    return Object.assign(findItem, newData);
   };
 
 

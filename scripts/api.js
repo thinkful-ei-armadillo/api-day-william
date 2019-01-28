@@ -3,6 +3,7 @@
 
 // make an IIFE that is captured by a global api variable
 const api = (function() {
+  
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/william';
 
   // create method for getting items
