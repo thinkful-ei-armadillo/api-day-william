@@ -20,7 +20,7 @@ const api = (function() {
     });
     return fetch(`${BASE_URL}/items`, {
       method: 'POST',
-      headers: { // new Headers didnt work
+      headers: { // example used new Headers, but didnt work. why?
         'Content-Type': 'application/json',
       },
       body: newItem
@@ -29,19 +29,29 @@ const api = (function() {
 
   // create method for updating item
   const updateItem = function(id, updateData) {
-    return fetch(`${BASE_URL}/items/{id}`, {
+    return fetch(`${BASE_URL}/items/${id}`, { // FORGOT $ for id
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: updateData
+      body: JSON.stringify(updateData) // needed to stringify data into JSON
+    });
+  };
+
+  // create method for deleting item
+  const deleteItem = function(id) {
+    return fetch(`${BASE_URL}/items/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
     });
   };
 
 
 
   return {
-    getItems, createItem, updateItem
+    getItems, createItem, updateItem, deleteItem
   };
 
 }());

@@ -61,16 +61,19 @@ const shoppingList = (function(){
     $('.js-shopping-list').html(shoppingListItemsString);
   }
   
-  
+  // step #5: add a call to API before we add to local store
   function handleNewItemSubmit() {
     $('#js-shopping-list-form').submit(function (event) {
       event.preventDefault();
       const newItemName = $('.js-shopping-list-entry').val();
       $('.js-shopping-list-entry').val('');
+
       api.createItem(newItemName)
         .then(res => res.json())
         .then((newItem) => {
           store.addItem(newItem);
+        })
+        .then(() => {
           render();
         });
     });
@@ -82,14 +85,24 @@ const shoppingList = (function(){
       .data('item-id');
   }
   
+
+  // step 8: modify item clicked
   function handleItemCheckClicked() {
     $('.js-shopping-list').on('click', '.js-item-toggle', event => {
       const id = getItemIdFromElement(event.currentTarget);
-      store.findAndToggleChecked(id);
-      render();
+      const currentCheckedItem = !store.findById(id).currentCheckedItem; // variable for current item in store user toggled
+      // const newObj = { 
+      //   currentCheckedItem
+      // };
+      api.updateItem(id, {currentCheckedItem} ) // call api.updateItem, sending in the id and a new OBJECT containing opposite of item.checked?
+        .then(res => store.findAndUpdate(id, {currentCheckedItem})); // inside then() call store.findAndUpdate sending same arguments & render()
+      render();   
+      // store.findAndToggleChecked(id);
     });
   }
   
+
+  // step 9: complete the delete item work
   function handleDeleteItemClicked() {
     // like in `handleItemCheckClicked`, we use event delegation
     $('.js-shopping-list').on('click', '.js-item-delete', event => {
@@ -102,17 +115,24 @@ const shoppingList = (function(){
     });
   }
   
+  // step 8: modify this method
   function handleEditShoppingItemSubmit() {
     $('.js-shopping-list').on('submit', '.js-edit-item', event => {
       event.preventDefault();
       const id = getItemIdFromElement(event.currentTarget);
       const itemName = $(event.currentTarget).find('.shopping-item').val();
+      // call api.updateItem, sending in the id and new object containg newName
+      api.updateItem(id, itemName); // step 8
+      store.findAndUpdate(id, itemName); // step 8
       store.findAndUpdateName(id, itemName);
       store.setItemIsEditing(id, false);
       render();
     });
   }
   
+
+
+
   function handleToggleFilterClick() {
     $('.js-filter-checked').click(() => {
       store.toggleCheckedFilter();

@@ -5,7 +5,7 @@ $(document).ready(function() {
   shoppingList.bindEventListeners();
   shoppingList.render();
   api.getItems()
-    // .then(res => res.json())
+    .then(res => res.json())
     .then((items) => {
       // const item = store.items[0];
       // console.log('current name: ' + item.name);
@@ -13,8 +13,6 @@ $(document).ready(function() {
       // console.log('new name: ' + item.name);
       items.forEach((item) => store.addItem(item));
       shoppingList.render();
-
-
     });
 
   // api.getItems() // Old test block wasnt working until refreshing page to see updated one on STEP 6..
@@ -30,7 +28,7 @@ $(document).ready(function() {
     
 
 
-store.items.push(Item.create('apples'));
+// store.items.push(Item.create('apples'));
 
 
 
