@@ -38,6 +38,13 @@ const api = (function() {
     });
   };
 
+  // create a single findAndUpdate store method
+  const findAndUpdate = function(id, newData) {
+    
+  }
+
+
+
   return {
     getItems, createItem, updateItem
   };

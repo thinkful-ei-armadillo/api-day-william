@@ -22,24 +22,35 @@ const store = (function() {
     return this.items.find(item => item.id === id);
   };
 
-  const findAndToggleChecked = function(id) {
-    const item = this.findById(id);
-    item.checked = !item.checked;
-  };
+  // Step 7: remove findAndToggleChecked
+  // const findAndToggleChecked = function(id) {
+  //   const item = this.findById(id);
+  //   item.checked = !item.checked;
+  // };
 
   const findAndDelete = function(id) {
     this.items = this.items.filter(item => item.id !== id);
   };
 
-  const findAndUpdateName = function(id, name) {
-    try {
-      Item.validateName(name);
-      const item = this.findById(id);
-      item.name = name;
-    } catch(e) {
-      console.log('Cannot update name: ' + e.message);
-    }
+  // Step 7: remove findAndUpdateName
+  // const findAndUpdateName = function(id, name) {
+  //   try {
+  //     Item.validateName(name);
+  //     const item = this.findById(id);
+  //     item.name = name;
+  //   } catch(e) {
+  //     console.log('Cannot update name: ' + e.message);
+  //   }
+  // };
+
+  
+  // Step 7: Create a consolidated findAndUpdate method
+  const findAndUpdate = function(id, newData) {
+    const item = this.findById(id);
+    Object.assign(item, newData);
   };
+
+
 
   const toggleCheckedFilter = function() {
     this.hideCheckedItems = !this.hideCheckedItems;
@@ -58,12 +69,12 @@ const store = (function() {
     items: [],
     hideCheckedItems: false,
     searchTerm: '',
-
+    findAndUpdate, // added consolidated method
     addItem,
     findById,
-    findAndToggleChecked,
+    // findAndToggleChecked,
     findAndDelete,
-    findAndUpdateName,
+    // findAndUpdateName,
     toggleCheckedFilter,
     setSearchTerm,
     setItemIsEditing,
