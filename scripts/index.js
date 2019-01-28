@@ -10,28 +10,20 @@ $(document).ready(function() {
       items.forEach((item) => store.addItem(item));
       shoppingList.render();
     });
+
+//   api.getItems() // Old test block wasnt working until refreshing page to see updated one on STEP 6..
+//     .then(res => res.json())
+//     .then((items) => {
+//       const item = items[0];
+//       return api.updateItem(item.id, { name: 'foobar' });
+//     })
+//     .then(res => res.json())
+//     .then(() => console.log('updated!'));
 });
+    
+
 
 store.items.push(Item.create('apples'));
 
-// api.getItems()
-//   .then(res => res.json())
-//   .then(res => console.log(res));
-// // tested and works
-
-// console.log(api.BASE_URL);
 
 
-// copying and pasting directly from directions didnt work.
-// had to manually type it out to fix syntax errors
-// api.createItem('pears')
-//   .then(res => res.json()) // uncaught typeError: cannot read prop 'then of undefined
-//   .then((newItem) => {
-//     return api.getItems();
-//   })
-//   .then(res => res.json())
-//   .then((items) => {
-//     console.log(items);
-//   });
-
-// creates new pear items with different id every load

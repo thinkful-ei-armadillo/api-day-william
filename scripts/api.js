@@ -5,7 +5,7 @@
 const api = (function() {
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/william';
 
-  // function for getItems
+  // create method for getting items
   const getItems = function() {
     return fetch(`${BASE_URL}/items`);
     //   .then(res => res.json())
@@ -13,7 +13,7 @@ const api = (function() {
     // return Promise.resolve('A successful response!');
   };
 
-  // function for createItem
+  // create method for creating item
   const createItem = function(name) {
     const newItem = JSON.stringify({
       name,
@@ -27,9 +27,19 @@ const api = (function() {
     });
   };
 
+  // create method for updating item
+  const updateItem = function(id, updateData) {
+    return fetch(`${BASE_URL}/items/{id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: updateData
+    });
+  };
 
   return {
-    getItems, createItem
+    getItems, createItem, updateItem
   };
 
 }());
