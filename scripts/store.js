@@ -46,8 +46,8 @@ const store = (function() {
   
   // Step 7: Create a consolidated findAndUpdate method
   const findAndUpdate = function(id, newData) {
-    const item = this.findById(id);
-    Object.assign(item, newData);
+    const findItem = this.findById(id);
+    Object.assign(findItem, newData);
   };
 
 
