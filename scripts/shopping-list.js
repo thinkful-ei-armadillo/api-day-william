@@ -90,12 +90,12 @@ const shoppingList = (function(){
   function handleItemCheckClicked() {
     $('.js-shopping-list').on('click', '.js-item-toggle', event => {
       const id = getItemIdFromElement(event.currentTarget);
-      const currentCheckedItem = !store.findById(id).currentCheckedItem; // variable for current item in store user toggled
+      const item = store.findById(id); // variable for current item in store user toggled
       // const newObj = { 
       //   currentCheckedItem
       // };
-      api.updateItem(id, { currentCheckedItem } ) // call api.updateItem, sending in the id and a new OBJECT containing opposite of item.checked?
-        .then(store.findAndUpdate(id, {currentCheckedItem})); // inside then() call store.findAndUpdate sending same arguments & render()
+      api.updateItem(id, { checked: !item.checked } ) // call api.updateItem, sending in the id, and the required keys (name, checked) for PATCH method
+        .then(store.findAndUpdate(id, { checked: !item.checked })); // inside then() call store.findAndUpdate sending same arguments & render()
       render();   
       // store.findAndToggleChecked(id);
     });
