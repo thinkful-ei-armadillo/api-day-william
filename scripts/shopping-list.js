@@ -101,7 +101,19 @@ const shoppingList = (function(){
     });
   }
   
-
+  // step 8: modify this method
+  function handleEditShoppingItemSubmit() {
+    $('.js-shopping-list').on('submit', '.js-edit-item', event => {
+      event.preventDefault();
+      const id = getItemIdFromElement(event.currentTarget);
+      const itemName = $(event.currentTarget).find('.shopping-item').val();
+      // call api.updateItem, sending in the id and new object containing itemName
+      api.updateItem(id, { name: itemName } ); // step 8
+      store.findAndUpdate(id, { name: itemName });
+      render();
+    });
+  }
+  
   // step 9: complete the delete item work
   function handleDeleteItemClicked() {
     // like in `handleItemCheckClicked`, we use event delegation
@@ -114,22 +126,7 @@ const shoppingList = (function(){
       render();
     });
   }
-  
-  // step 8: modify this method
-  function handleEditShoppingItemSubmit() {
-    $('.js-shopping-list').on('submit', '.js-edit-item', event => {
-      event.preventDefault();
-      const id = getItemIdFromElement(event.currentTarget);
-      const itemName = $(event.currentTarget).find('.shopping-item').val();
-      // call api.updateItem, sending in the id and new object containg newName
-      api.updateItem(id, itemName); // step 8
-      store.findAndUpdate(id, itemName); // step 8
-      // store.findAndUpdateName(id, itemName);
-      // store.setItemIsEditing(id, false);
-      render();
-    });
-  }
-  
+    
 
 
 
